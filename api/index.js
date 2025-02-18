@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+// import cors from "cors";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
@@ -15,6 +16,7 @@ mongoose
   });
 
 const app = express();
+// app.use(cors());
 app.use(express.json());
 
 app.listen(3000, () => {
