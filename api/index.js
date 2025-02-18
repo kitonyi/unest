@@ -32,6 +32,7 @@ app.get("/", (req, res) => {
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 
+//Handle any errors generated when you add next to requests
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
