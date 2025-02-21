@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useRef, useState, useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import {
   getDownloadURL,
   getStorage,
@@ -23,6 +24,7 @@ const Profile = () => {
   const [file, setFile] = useState(undefined);
   const [fileUploadProgress, setFileUploadProgress] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+  // const [updateSuccess, setUpdateSuccess] = useState(false);
   const dispatch = useDispatch();
 
   //console.log(file)
@@ -41,7 +43,6 @@ const Profile = () => {
     e.preventDefault();
     try {
       dispatch(updateUserInfoStart());
-      console.log(`/api/user/update/${currentUser._id}`);
       const res = await fetch(`/api/user/update/${currentUser._id}`, {
         method: "POST",
         // credentials: "include", // Include credentials (cookies) in the request
@@ -56,6 +57,8 @@ const Profile = () => {
         return;
       }
       dispatch(updateUserInfoSuccess(data));
+      // setUpdateSuccess(true);
+      toast.success("User details updated successfully");
     } catch (error) {
       dispatch(updateUserInfoFailure(error.message));
     }
@@ -150,7 +153,12 @@ const Profile = () => {
         <span className="text-red-700 cursor-pointer">Delete Account</span>
         <span className="text-red-700 cursor-pointer">Sign Out</span>
       </div>
-      <p className="text-red-700 mt-5">{error? error: ""}</p>
+      <p className="text-red-700 mt-5">{error ? error : ""}</p>
+      {/* <p className="text-green-700 mt-5">
+        {updateSuccess ? "User details updated successfully" : ""}
+      </p> */}
+
+      <Toaster />
     </div>
   );
 };
