@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import userRoute from "./routes/user.route.js";
 import authRoute from "./routes/auth.route.js";
+import listingRoute from "./routes/listing.route.js";
 dotenv.config();
 
 mongoose
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
+app.use("/api/listing", listingRoute);
 
 //Handle any errors generated when you add next to requests
 app.use((err, req, res, next) => {
